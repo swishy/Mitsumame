@@ -5,6 +5,10 @@ buildscript {
         maven {
             url "https://oss.sonatype.org/content/repositories/snapshots"
         }
+        maven {
+            url "https://repository.jboss.org/nexus/content/groups/public/"
+        }
+
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$ext.kotlin_version"
@@ -22,7 +26,7 @@ repositories {
         url "https://oss.sonatype.org/content/repositories/snapshots"
     }
     maven {
-        url "http://repository.jetbrains.com/all"
+        url "http://repo1.maven.org/maven2/org/hibernate/hibernate-core"
     }
 }
 
@@ -34,7 +38,8 @@ dependencies {
             "org.apache.httpcomponents:httpclient:4.2.3",
             "org.apache.httpcomponents:httpcore:4.2.3",
             "org.slf4j:slf4j-api:1.7.5",
-            "org.slf4j:slf4j-simple:1.7.5"
+            "org.slf4j:slf4j-simple:1.7.5",
+            "org.hibernate:hibernate-core:4.2.6.Final"
     compile files('./lib/wasabi.jar', './lib/kotlin-runtime.jar')
     compile "org.jetbrains.kotlin:kotlin-stdlib:$ext.kotlin_version"
 
