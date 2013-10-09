@@ -6,6 +6,8 @@ import com.st8vrt.mitsumame.webservices.core
 import java.net.URI
 import interceptors.useMitsumameAuthentication
 import interceptors.useMitsumameEncryption
+import storage.types.Device
+import java.util.UUID
 
 /**
  * Created by swishy on 10/1/13.
@@ -28,10 +30,10 @@ public class MitsumameServer : AppServer()
 
         // Assign Routes
         this.get("/mitsumame", core.rootDocumentHandler)
-        this.get("/testendpoint", { response.send("TEST!") })
+        this.get("/testendpoint", { response.send("TESTENDPOINT") })
 
         // Setup Mitsumame Interceptors for Auth and Crypto
-        this.useMitsumameAuthentication()
+        //this.useMitsumameAuthentication()
         this.useMitsumameEncryption()
 
         this.start(true)

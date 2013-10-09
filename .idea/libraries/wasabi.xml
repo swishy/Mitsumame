@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="wasabi">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/wasabi.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
