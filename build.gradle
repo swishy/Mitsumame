@@ -1,0 +1,61 @@
+buildscript {
+    ext.kotlin_version = '0.6.+'
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://oss.sonatype.org/content/repositories/snapshots"
+        }
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$ext.kotlin_version"
+    }
+}
+
+apply plugin: 'kotlin'
+apply plugin: 'application'
+
+mainClassName = 'com.st8vrt.mitsumame.St8vrtPackage'
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://oss.sonatype.org/content/repositories/snapshots"
+    }
+    maven {
+        url "http://repository.jetbrains.com/all"
+    }
+}
+
+dependencies {
+    compile "org.codehaus.jackson:jackson-mapper-asl:1.9.12",
+            "io.netty:netty-all:4.0.0.CR1",
+            "commons-codec:commons-codec:1.6",
+            "commons-logging:commons-logging:1.1.1",
+            "org.apache.httpcomponents:httpclient:4.2.3",
+            "org.apache.httpcomponents:httpcore:4.2.3",
+            "org.slf4j:slf4j-api:1.7.5",
+            "org.slf4j:slf4j-simple:1.7.5"
+    compile files('./lib/wasabi.jar', './lib/kotlin-runtime.jar')
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$ext.kotlin_version"
+
+}
+
+sourceSets {
+    src {
+        main {
+            kotlin
+        }
+    }
+    test {
+        main {
+            kotlin
+        }
+    }
+    main.java.srcDirs += 'src/main/kotlin'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.6'
+}
+
+task stage(dependsOn: ['clean', 'jar'])
