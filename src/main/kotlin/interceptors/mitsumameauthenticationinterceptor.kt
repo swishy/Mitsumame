@@ -45,8 +45,8 @@ public class MitsumameAuthenticationInterceptor(): Interceptor {
 
         var onetimeTokenUrl = URI(request.host + "/onetimetoken")
 
-        response.setHttpStatus(HttpStatusCodes.Unauthorized)
-        response.setResponseContentType(ContentType.TextPlain)
+        response.statusCode = HttpStatusCodes.Unauthorized.statusCode
+        response.contentType = ContentType.TextPlain.name()
         response.send("You are not authenticated against the requested application.")
         response.location = URI(request.host + "/sessions").toString() as String
         response.addExtraHeader("UserTokenUri", onetimeTokenUrl.toString() as String)

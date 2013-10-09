@@ -19,23 +19,21 @@ public class Startup
     }
 }
 
-public class MitsumameServer
+public class MitsumameServer : AppServer()
 {
-    private var appServer : AppServer = AppServer()
-
     MitsumameServer()
     {
         // Generate Mitsumame RootDocument
         Startup().addRootDocumentEntries();
 
         // Assign Routes
-        appServer.get("/mitsumame", core.rootDocumentHandler)
-        appServer.get("/testendpoint", { response.send("TEST!") })
+        this.get("/mitsumame", core.rootDocumentHandler)
+        this.get("/testendpoint", { response.send("TEST!") })
 
         // Setup Mitsumame Interceptors for Auth and Crypto
-        //appServer.useMitsumameAuthentication()
-        appServer.useMitsumameEncryption()
+        this.useMitsumameAuthentication()
+        this.useMitsumameEncryption()
 
-        appServer.start(true)
+        this.start(true)
     }
 }

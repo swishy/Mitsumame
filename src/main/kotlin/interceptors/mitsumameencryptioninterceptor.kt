@@ -30,8 +30,8 @@ public class MitsumameEncryptionInterceptor(): Interceptor {
         if (request != null)
             return true
 
-        response.setHttpStatus(HttpStatusCodes.InternalServerError)
-        response.setResponseContentType(ContentType.TextPlain)
+        response.statusCode = HttpStatusCodes.InternalServerError.statusCode
+        response.contentType = ContentType.TextPlain.name()
         response.send("Encryption processing failed.")
         return false
     }

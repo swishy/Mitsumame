@@ -20,8 +20,8 @@ import org.wasabi.routing.InterceptOn
 public class MitsumameExceptionInterceptor(): Interceptor {
     override fun intercept(request: Request, response: Response): Boolean {
 
-        response.setHttpStatus(HttpStatusCodes.InternalServerError)
-        response.setResponseContentType(ContentType.TextPlain)
+        response.statusCode = HttpStatusCodes.InternalServerError.statusCode
+        response.contentType = ContentType.TextPlain.name()
         response.send("Error happened")
         return false
     }
