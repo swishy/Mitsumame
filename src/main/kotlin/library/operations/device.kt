@@ -1,6 +1,7 @@
-package library.operations
+package com.st8vrt.mitsumame.library.operations
 
 import java.util.UUID
+import com.st8vrt.mitsumame.configuration.mitsumameConfiguration
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,5 +12,5 @@ import java.util.UUID
  */
 public fun findOrCreateDevice(deviceType : String, deviceId : UUID)
 {
-      configuration.mitsumameConfiguration.deviceStorageProvider.getDevice(deviceId)
+      mitsumameConfiguration.deviceStorageProvider.getDevice(deviceId)
 }

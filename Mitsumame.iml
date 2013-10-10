@@ -28,7 +28,8 @@
     <orderEntry type="library" exported="" name="jackson-mapper-asl-1.9.12" level="project" />
     <orderEntry type="library" exported="" name="httpclient-4.2.3" level="project" />
     <orderEntry type="library" exported="" name="hibernate-core-4.2.6.Final" level="project" />
-    <orderEntry type="library" exported="" name="hibernate-commons-annotations-4.0.2.Final" level="project" />
+    <orderEntry type="library" name="hibernate-commons-annotations-4.0.2.Final" level="project" />
+    <orderEntry type="library" name="hibernate-jpa-2.0-api-1.0.1.Final" level="project" />
   </component>
 </module>
 

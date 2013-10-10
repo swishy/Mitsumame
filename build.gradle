@@ -28,6 +28,9 @@ repositories {
     maven {
         url "http://repo1.maven.org/maven2/org/hibernate/hibernate-core"
     }
+    maven {
+        url "http://repo1.maven.org/maven2/javax/persistence/persistence-api/"
+    }
 }
 
 dependencies {
@@ -39,7 +42,9 @@ dependencies {
             "org.apache.httpcomponents:httpcore:4.2.3",
             "org.slf4j:slf4j-api:1.7.5",
             "org.slf4j:slf4j-simple:1.7.5",
-            "org.hibernate:hibernate-core:4.2.6.Final"
+            "org.hibernate:hibernate-core:4.2.6.Final",
+            "org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.0.Final"
+
     compile files('./lib/wasabi.jar', './lib/kotlin-runtime.jar')
     compile "org.jetbrains.kotlin:kotlin-stdlib:$ext.kotlin_version"
 

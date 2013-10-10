@@ -24,6 +24,4 @@ public class Session(
     // The UUID of the user associated with the session
     public val userId : UUID
 )
-{
-
-}
+{}

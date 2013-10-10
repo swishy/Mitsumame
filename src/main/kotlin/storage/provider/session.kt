@@ -19,18 +19,15 @@ private var currentSessions : HashMap<UUID, Session> =  HashMap<UUID, Session>()
 public class InMemorySessionStorageProvider : SessionStorageProvider
 {
 
-
     override fun getSession(sessionId: UUID): Session? {
         return currentSessions.get(sessionId)
     }
+
     override fun deleteSession(sessionId: String) {
         throw UnsupportedOperationException()
     }
-    override fun createSession() : Session {
-        throw UnsupportedOperationException()
-    }
 
-    override fun add(session: Session)
+    override fun storeSession(session: Session)
     {
         currentSessions.put(session.sessionId, session)
     }

@@ -1,9 +1,11 @@
-package configuration
+package com.st8vrt.mitsumame.configuration
 
 import storage.provider.InMemorySessionStorageProvider
 import storage.SessionStorageProvider
 import storage.DeviceStorageProvider
 import storage.provider.InMemoryDeviceStorageProvider
+import storage.provider.InMemoryUserStorageProvider
+import storage.UserStorageProvider
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,9 +21,11 @@ public var mitsumameConfiguration : MitsumameConfiguration = MitsumameConfigurat
 public class MitsumameConfiguration
 {
     // Can be assigned to custom provider.
-    public val sessionStorageProvider : SessionStorageProvider = InMemorySessionStorageProvider()
+    public var sessionStorageProvider : SessionStorageProvider = InMemorySessionStorageProvider()
 
-    public val deviceStorageProvider : DeviceStorageProvider = InMemoryDeviceStorageProvider()
+    public var deviceStorageProvider : DeviceStorageProvider = InMemoryDeviceStorageProvider()
+
+    public var userStorageProvider : UserStorageProvider = InMemoryUserStorageProvider()
 
     // Default to 2 hours.
     public var sessionDuration : Long = 7200000

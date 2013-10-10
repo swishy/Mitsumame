@@ -17,7 +17,7 @@ public class OneTimeTokenDocument(
         val JoobMobileEncryption : Boolean = true,
 
         // Specifies the number of iterations to perform when strengthening keys so client/server are synced
-        val KeyStrengtheningIterations : Integer
+        val KeyStrengtheningIterations : Int
 )
 {}
 

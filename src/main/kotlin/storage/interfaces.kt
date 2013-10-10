@@ -3,6 +3,7 @@ package storage
 import storage.types.Session
 import java.util.UUID
 import storage.types.Device
+import storage.types.User
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,15 +15,13 @@ import storage.types.Device
 
 trait SessionStorageProvider {
 
-    fun createSession() : Session
-
     fun getSession(sessionId: UUID) : Session?
 
     fun deleteSession(sessionId: String)
 
-    // TODO remove once auth is working.!!!!
-    fun add(session: Session)
+    fun storeSession(session: Session)
 }
+
 
 trait DeviceStorageProvider {
 
@@ -31,4 +30,14 @@ trait DeviceStorageProvider {
     fun getDevice(deviceId: UUID) : Device?
 
     fun deleteDevice(deviceId: UUID)
+}
+
+
+trait UserStorageProvider {
+
+    fun storeUser(user: User)
+
+    fun getUser(userId: UUID) : User?
+
+    fun deleteUser(userId: UUID)
 }
