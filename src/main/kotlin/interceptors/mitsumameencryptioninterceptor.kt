@@ -37,7 +37,25 @@ public class MitsumameEncryptionInterceptor(): Interceptor {
     }
 }
 
+public class MitsumameDecryptionInterceptor(): Interceptor {
+
+    private var log = LoggerFactory.getLogger(javaClass<MitsumameEncryptionInterceptor>())
+
+    override fun intercept(request: Request, response: Response): Boolean {
+
+        log!!.info("Decryption Interceptor invoked.")
+
+        // TODO implement decryption...
+        if (request != null)
+            return true
+
+        // TODO call authentication handler once done here and force auth again as something in credentials is bad.
+        return false
+    }
+}
+
 
 fun AppServer.useMitsumameEncryption(path: String = "*") {
-    intercept(MitsumameEncryptionInterceptor(), path, InterceptOn.PreRequest)
+    intercept(MitsumameDecryptionInterceptor(), path, InterceptOn.PreParsing)
+    intercept(MitsumameEncryptionInterceptor(), path, InterceptOn.PostSerialization)
 }

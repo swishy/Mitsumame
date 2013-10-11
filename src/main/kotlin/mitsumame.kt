@@ -11,6 +11,7 @@ import storage.types.Device
 import java.util.UUID
 import storage.types.User
 import org.slf4j.LoggerFactory
+import org.wasabi.interceptors.negotiateContent
 
 /**
  * Created by swishy on 10/1/13.
@@ -38,11 +39,13 @@ public class MitsumameServer : AppServer()
 
         log!!.info("Admin Created: ${user}")
 
+        this.negotiateContent()
+
         // Assign Routes
         this.get("/mitsumame", core.rootDocumentHandler)
         this.get("/testendpoint", {
             var testObject = Test()
-            log!!.info("Test Object Created: ${testObject.toString()}")
+            log!!.info("Test Object Created: ${testObject}")
             response.send(testObject)
         })
 
