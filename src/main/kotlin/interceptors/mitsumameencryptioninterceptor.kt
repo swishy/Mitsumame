@@ -56,6 +56,6 @@ public class MitsumameDecryptionInterceptor(): Interceptor {
 
 
 fun AppServer.useMitsumameEncryption(path: String = "*") {
-    intercept(MitsumameDecryptionInterceptor(), path, InterceptOn.PreParsing)
-    intercept(MitsumameEncryptionInterceptor(), path, InterceptOn.PostSerialization)
+    intercept(MitsumameDecryptionInterceptor(), path, InterceptOn.PreRequest)
+    intercept(MitsumameEncryptionInterceptor(), path, InterceptOn.PostRequest)
 }

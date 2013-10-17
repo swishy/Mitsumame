@@ -4,7 +4,6 @@ import org.wasabi.app.AppServer
 import interceptors.useMitsumameAuthentication
 import interceptors.useMitsumameEncryption
 import com.st8vrt.mitsumame.webservices.core
-import org.wasabi.interceptors.negotiateContent
 
 fun main(args: Array<String>) {
 

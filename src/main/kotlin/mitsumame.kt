@@ -11,7 +11,6 @@ import storage.types.Device
 import java.util.UUID
 import storage.types.User
 import org.slf4j.LoggerFactory
-import org.wasabi.interceptors.negotiateContent
 
 /**
  * Created by swishy on 10/1/13.
@@ -34,12 +33,11 @@ public class MitsumameServer : AppServer()
         // Generate Mitsumame RootDocument
         Startup().addRootDocumentEntries();
 
+        // TODO remove initial setup crud implemented during development for testing
         var user = User(UUID.randomUUID(), "admin", "password")
         mitsumameConfiguration.userStorageProvider.storeUser(user)
 
         log!!.info("Admin Created: ${user}")
-
-        this.negotiateContent()
 
         // Assign Routes
         this.get("/mitsumame", core.rootDocumentHandler)

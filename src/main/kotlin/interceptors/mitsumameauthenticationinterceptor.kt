@@ -56,5 +56,5 @@ public class MitsumameAuthenticationInterceptor(): Interceptor {
 
 
 fun AppServer.useMitsumameAuthentication(path: String = "*") {
-    intercept(MitsumameAuthenticationInterceptor(), path, InterceptOn.PreRequest)
+    intercept(MitsumameAuthenticationInterceptor(), path, InterceptOn.PreExecution)
 }
