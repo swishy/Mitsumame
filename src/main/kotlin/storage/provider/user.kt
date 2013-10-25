@@ -55,7 +55,8 @@ public class HibernateUserStorageProvider : UserStorageProvider
         var session = factory?.openSession()
         try
         {
-            session?.save(user)
+            var id = session?.save(user) as Long
+            user.userId = id
         }
         catch(exception : Exception)
                 {

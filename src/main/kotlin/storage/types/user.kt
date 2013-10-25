@@ -14,9 +14,10 @@ import javax.persistence.Id
 
 [Entity]
 public class User(
-        [Id]
-        val userId : UUID,
         val userName : String,
         val authToken : String
 )
-{}
+{
+    [Id]
+    var userId : Long = 0
+}
