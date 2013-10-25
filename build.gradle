@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '0.6.+'
+    ext.kotlin_version = '0.6.602'
     repositories {
         mavenCentral()
         maven {
@@ -43,6 +43,7 @@ dependencies {
             "org.slf4j:slf4j-api:1.7.5",
             "org.slf4j:slf4j-simple:1.7.5",
             "org.hibernate:hibernate-core:4.2.6.Final",
+            "postgresql:postgresql:9.1-901.jdbc4",
             "org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.0.Final"
 
     compile files('./lib/wasabi.jar', './lib/kotlin-runtime.jar')
