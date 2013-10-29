@@ -25,13 +25,13 @@ public class RootDocument
 
     public fun addRootDocumentUri(key : String, uri : URI)
     {
-        log!!.info("Adding root document entry: [${key}]")
+        log?.info("Adding root document entry: [${key}]")
         rootDocumentEntries.put(key, uri);
     }
 
     public fun getRootDocument() : HashMap<String, URI>
     {
-        log!!.info("Root Document entries: [${rootDocumentEntries}]")
+        log?.info("Root Document entries: [${rootDocumentEntries}]")
         return rootDocumentEntries;
     }
 }
@@ -43,21 +43,23 @@ public class SessionUtilities
     public fun isValid(sessionId : String) : Boolean
     {
         // TODO Check session is valid.
-        log!!.info("Session Id: [${sessionId}]")
+        log?.info("Session Id: [${sessionId}]")
         return true;
     }
 }
 
 public class EncryptionUtilities
 {
-    private var salt = "Adfas" + 24576 + "6&#N%^BW" + ",.|%^&*"
+    private val salt = "Adfas" + 24576 + "6&#N%^BW" + ",.|%^&*"
+
+    private val aesBlockSize = 32;
 
     private var log = LoggerFactory.getLogger(javaClass<SessionUtilities>())
 
     public fun encryptString(message : String, key : ByteArray) : String  {
         var iv = getRandomIv();
 
-        return Base64.encodeBase64String(iv) + encryptString(message, key, salt.getBytes(), iv as ByteArray);
+        return Base64.encodeBase64String(iv) + encryptString(message, key, salt.getBytes(), iv as ByteArray)
     }
 
     public fun encryptString(plainText:String, encryptionKey:ByteArray, salt:ByteArray, iv:ByteArray) : String {
@@ -67,10 +69,13 @@ public class EncryptionUtilities
         try{
             var factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1")
 
-            var charEncryptionKey = encryptionKey.toCharArray();
+            var charEncryptionKey = encryptionKey.toCharArray()
 
-            var keyspec = PBEKeySpec(charEncryptionKey, salt, 1024, 16);
-            var secretKey = factory?.generateSecret(keyspec);
+            /*
+             TODO: encryption strength should come from settings
+             */
+            var keyspec = PBEKeySpec(charEncryptionKey, salt, 1024, aesBlockSize)
+            var secretKey = factory?.generateSecret(keyspec)
 
             var cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             cipher?.init(Cipher.ENCRYPT_MODE, SecretKeySpec(secretKey?.getEncoded(), "AES")
@@ -80,6 +85,30 @@ public class EncryptionUtilities
         } catch(e:Exception) {
             log?.error("Unable to encrypt message", e)
             throw Exception("Unable to encrypt message")
+        }
+    }
+
+    public fun decryptString(encryptedPayload:String) : String {
+        var iv = getIvFromPayload(encryptedPayload) as ByteArray
+        var message = getEncryptedMessageFromPayload(encryptedPayload)?: ""
+        var key = Base64.decodeBase64("") as ByteArray
+        return decryptString(message, key, salt.getBytes(), iv)
+    }
+
+    public fun decryptString(cipherText:String, key:ByteArray, salt:ByteArray, iv:ByteArray) : String {
+        try{
+            var factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+
+            var keyspec = PBEKeySpec(key.toCharArray(), salt,1024, aesBlockSize);
+            var secretKey = factory?.generateSecret(keyspec);
+
+            var cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+            cipher?.init(Cipher.DECRYPT_MODE, SecretKeySpec(secretKey?.getEncoded(), "AES"), IvParameterSpec(iv))
+            var ciphertext = Base64.decodeBase64(cipherText);
+            return cipher?.doFinal(ciphertext)?.toString("UTF-8") as String
+        } catch(e:Exception) {
+            log?.error("Unable to decrypt message")
+            throw Exception("Unable to decrypt message");
         }
     }
 
@@ -95,9 +124,29 @@ public class EncryptionUtilities
             throw Exception("Unable to create random IV")
         }
     }
+
+    /**
+     * Retrieves the first 16bytes from the given payload
+     * @param payload Base64 encoded string
+     * @return the IV as as a ByteArray
+     */
+    public fun getIvFromPayload(payload:String) : ByteArray? {
+        var iv = payload.substring(0, 24)
+        return Base64.decodeBase64(iv)
+    }
+
+    /**
+     * Retrieves the encrypted message from the payload
+     * (ie. everything after the IV)
+     * @param payload Base64 encoded string
+     * @return the encrypted message as a Base64 string
+     */
+    public fun getEncryptedMessageFromPayload(payload:String) : String {
+        return payload.substring(24, payload.length())
+    }
 }
 
-public fun ByteArray.toCharArray() : CharArray? {
+public fun ByteArray.toCharArray() : CharArray {
     var charArray = CharArray(this.size)
 
     var count = 0
