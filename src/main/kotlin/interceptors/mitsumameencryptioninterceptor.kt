@@ -14,7 +14,7 @@ import org.wasabi.routing.RouteHandler
 import org.wasabi.app.AppServer
 import org.wasabi.http.HttpStatusCodes
 import org.wasabi.interceptors.Interceptor
-import com.st8vrt.mitsumame.utilities.SessionUtilities
+import com.st8vrt.mitsumame.library.utilities.Session
 import org.wasabi.routing.InterceptOn
 import org.slf4j.LoggerFactory
 
