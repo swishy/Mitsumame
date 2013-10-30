@@ -1,4 +1,4 @@
-package storage.types
+package com.st8vrt.mitsumame.storage.types
 
 import java.util.UUID
 import javax.persistence.Entity
@@ -19,5 +19,5 @@ public class User(
 )
 {
     [Id]
-    var userId : Long = 0
+    var userId : UUID = UUID.randomUUID()
 }

@@ -1,11 +1,9 @@
 package com.st8vrt.mitsumame.configuration
 
-import storage.provider.InMemorySessionStorageProvider
-import storage.SessionStorageProvider
-import storage.DeviceStorageProvider
-import storage.provider.InMemoryDeviceStorageProvider
-import storage.provider.InMemoryUserStorageProvider
-import storage.UserStorageProvider
+import com.st8vrt.mitsumame.storage.providers.InMemoryStorageProvider
+import com.st8vrt.mitsumame.storage.interfaces.SessionStorageProvider
+import com.st8vrt.mitsumame.storage.interfaces.DeviceStorageProvider
+import com.st8vrt.mitsumame.storage.interfaces.UserStorageProvider
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,12 +18,12 @@ public var mitsumameConfiguration : MitsumameConfiguration = MitsumameConfigurat
 
 public class MitsumameConfiguration
 {
-    // Can be assigned to custom provider.
-    public var sessionStorageProvider : SessionStorageProvider = InMemorySessionStorageProvider()
+    // Can be assigned to custom providers.
+    public var sessionStorageProvider : SessionStorageProvider = InMemoryStorageProvider()
 
-    public var deviceStorageProvider : DeviceStorageProvider = InMemoryDeviceStorageProvider()
+    public var deviceStorageProvider : DeviceStorageProvider = InMemoryStorageProvider()
 
-    public var userStorageProvider : UserStorageProvider = InMemoryUserStorageProvider()
+    public var userStorageProvider : UserStorageProvider = InMemoryStorageProvider()
 
     // Default to 2 hours.
     public var sessionDuration : Long = 7200000
