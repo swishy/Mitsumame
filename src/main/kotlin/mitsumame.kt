@@ -5,8 +5,8 @@ import com.st8vrt.mitsumame.library.utilities.RootDocument
 import com.st8vrt.mitsumame.webservices.core
 import com.st8vrt.mitsumame.configuration.mitsumameConfiguration
 import java.net.URI
-import interceptors.useMitsumameAuthentication
-import interceptors.useMitsumameEncryption
+import com.st8vrt.mitsumame.interceptors.useMitsumameAuthentication
+import com.st8vrt.mitsumame.interceptors.useMitsumameEncryption
 import com.st8vrt.mitsumame.storage.types.Device
 import java.util.UUID
 import com.st8vrt.mitsumame.storage.types.User
