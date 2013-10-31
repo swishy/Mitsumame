@@ -26,7 +26,7 @@ public class Encryption
     public fun encryptByteArray(array : ByteArray, key : ByteArray) : String  {
         var iv = getRandomIv();
 
-        return Base64.encodeBase64String(iv) + encryptByteArray(message, key, salt.getBytes(), iv as ByteArray)
+        return Base64.encodeBase64String(iv) + encryptByteArray(array, key, salt.getBytes(), iv as ByteArray)
     }
 
     public fun encryptString(message : String, key : ByteArray) : String  {
