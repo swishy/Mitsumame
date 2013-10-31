@@ -18,18 +18,22 @@ public class MitsumameEncryptionInterceptor() : Interceptor {
 
         log!!.info("Encryption Interceptor invoked.")
 
-        // TODO implement encryption...
-        var buffer = response.sendBuffer
-
         var cryptoHelper = Encryption()
 
-
-        if (response != null)
+        try
+        {
+            // TODO check type should be either string or ByteArray at this point in the stack depending on
+            // TODO whether its binary data or serialised object.
+            response.send(cryptoHelper.encryptString(response.sendBuffer!! as String, ByteArray(4)))
             return true
+        }
+        catch(exception: Exception)
+                {
+                    response.statusCode = HttpStatusCodes.InternalServerError.statusCode
+                    response.contentType = ContentType.TextPlain.name()
+                    response.send("Encryption processing failed.")
+                    return false
+                }
 
-        response.statusCode = HttpStatusCodes.InternalServerError.statusCode
-        response.contentType = ContentType.TextPlain.name()
-        response.send("Encryption processing failed.")
-        return false
     }
 }

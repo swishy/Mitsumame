@@ -23,10 +23,42 @@ public class Encryption
 
     private var log = LoggerFactory.getLogger(javaClass<Session>())
 
+    public fun encryptByteArray(array : ByteArray, key : ByteArray) : String  {
+        var iv = getRandomIv();
+
+        return Base64.encodeBase64String(iv) + encryptByteArray(message, key, salt.getBytes(), iv as ByteArray)
+    }
+
     public fun encryptString(message : String, key : ByteArray) : String  {
         var iv = getRandomIv();
 
         return Base64.encodeBase64String(iv) + encryptString(message, key, salt.getBytes(), iv as ByteArray)
+    }
+
+    public fun encryptByteArray(array:ByteArray, encryptionKey:ByteArray, salt:ByteArray, iv:ByteArray) : String {
+
+        var ivToUse = iv ?: getRandomIv()
+
+        try{
+            var factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1")
+
+            var charEncryptionKey = encryptionKey.toCharArray()
+
+            /*
+             TODO: encryption strength should come from settings
+             */
+            var keyspec = PBEKeySpec(charEncryptionKey, salt, 1024, aesBlockSize)
+            var secretKey = factory?.generateSecret(keyspec)
+
+            var cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+            cipher?.init(Cipher.ENCRYPT_MODE, SecretKeySpec(secretKey?.getEncoded(), "AES")
+                    , IvParameterSpec(iv));
+
+            return Base64.encodeBase64String(cipher?.doFinal(array)) as String
+        } catch(e:Exception) {
+            log?.error("Unable to encrypt message", e)
+            throw Exception("Unable to encrypt message")
+        }
     }
 
     public fun encryptString(plainText:String, encryptionKey:ByteArray, salt:ByteArray, iv:ByteArray) : String {
