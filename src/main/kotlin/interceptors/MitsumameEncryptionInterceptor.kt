@@ -24,7 +24,7 @@ public class MitsumameEncryptionInterceptor() : Interceptor {
         {
             // TODO check type should be either string or ByteArray at this point in the stack depending on
             // TODO whether its binary data or serialised object.
-            response.send(cryptoHelper.encryptString(response.sendBuffer!! as String, ByteArray(4)))
+            response.send(cryptoHelper.encryptString(response.sendBuffer!! as String, cryptoHelper.generateKey("password", "&$&%DG")))
             return true
         }
         catch(exception: Exception)

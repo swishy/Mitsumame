@@ -11,6 +11,9 @@ import javax.crypto.spec.SecretKeySpec
 import javax.crypto.spec.IvParameterSpec
 import javax.crypto.KeyGenerator
 import java.security.SecureRandom
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
+import java.security.InvalidParameterException
 
 /**
  * Created by swishy on 30/10/13.
@@ -143,4 +146,25 @@ public class Encryption
     public fun getEncryptedMessageFromPayload(payload:String) : String {
         return payload.substring(24, payload.length())
     }
+
+    public fun generateKey(password : String, salt : String) : ByteArray
+    {
+        var array = ByteArray(0)
+
+        try
+        {
+
+            var digest = MessageDigest.getInstance("SHA-256")
+            array = digest.digest((salt + password).getBytes()) as ByteArray
+
+        }
+        catch(exception: NoSuchAlgorithmException)
+                {
+                    log?.error("Unable to generate an encryption key: ${exception}")
+                    InvalidParameterException("Unable to generate an encryption key")
+                }
+
+        return  array
+    }
+
 }
