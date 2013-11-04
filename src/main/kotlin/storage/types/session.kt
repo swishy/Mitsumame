@@ -12,6 +12,7 @@ import java.util.Date
  */
 
 public class Session(
+
     // The unique Id for this session.
     public val sessionId : UUID,
 

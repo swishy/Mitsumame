@@ -42,15 +42,16 @@ public class MitsumameServer : AppServer()
 
         log!!.info("Admin Created: ${user}")
 
-        // Assign Routes
+        // Assign Core Routes
         this.get("/mitsumame", core.rootDocumentHandler)
+        this.post("/onetimetoken", core.onetimeLoginTokenHandler)
         this.get("/testendpoint", {
             var testObject = Test()
             log!!.info("Test Object Created: ${testObject}")
             response.send(testObject)
         })
 
-        // Setup Mitsumame Interceptors for Auth and Crypto
+        // Setup Mitsumame Interceptors for Authentication and Crypto
         //this.useMitsumameAuthentication()
         this.useMitsumameEncryption()
 

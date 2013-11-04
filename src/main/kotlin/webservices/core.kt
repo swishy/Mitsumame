@@ -20,8 +20,13 @@ private var log = LoggerFactory.getLogger(javaClass<MitsumameServer>())
 val rootDocumentHandler = routeHandler {
 
     var rootDocument = com.st8vrt.mitsumame.rootDocument.getRootDocument()
-    log!!.info("Root Document: ${rootDocument}")
+    log?.info("Root Document: ${rootDocument}")
     response.send(rootDocument)
+}
+
+val onetimeLoginTokenHandler = routeHandler {
+
+    response.send("Implement me!")
 }
 
 
