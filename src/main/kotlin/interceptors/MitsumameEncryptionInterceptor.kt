@@ -20,11 +20,22 @@ public class MitsumameEncryptionInterceptor() : Interceptor {
 
         var cryptoHelper = Encryption()
 
+        // TODO get users key.
+        var password = "password"
+
         try
         {
-            // TODO check type should be either string or ByteArray at this point in the stack depending on
-            // TODO whether its binary data or serialised object.
-            response.send(cryptoHelper.encryptString(response.sendBuffer!! as String, cryptoHelper.generateKey("password", "&$&%DG")))
+            // Likely JSON serialised object so try such first.
+            when {
+                    response.sendBuffer is String -> {
+                    response.send(cryptoHelper.encryptString((response.sendBuffer as String), cryptoHelper.generateKey(password, cryptoHelper.salt)))
+                }
+                else -> {
+                    // Assume we have binary data and attempt to encrypt it.
+                    response.send(cryptoHelper.encryptByteArray((response.sendBuffer as ByteArray), cryptoHelper.generateKey(password, cryptoHelper.salt)))
+                }
+            }
+
             return true
         }
         catch(exception: Exception)

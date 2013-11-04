@@ -21,7 +21,7 @@ import java.security.InvalidParameterException
  */
 public class Encryption
 {
-    private val salt = "Adfas" + 24576 + "6&#N%^BW" + ",.|%^&*"
+    internal val salt = "Adfas" + 24576 + "6&#N%^BW" + ",.|%^&*"
 
     private val aesBlockSize = 256;
 
