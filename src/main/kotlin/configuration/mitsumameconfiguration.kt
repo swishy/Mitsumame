@@ -27,4 +27,7 @@ public class MitsumameConfiguration
 
     // Default to 2 hours.
     public var sessionDuration : Long = 7200000
+
+    // Default to 1024 iterations during key strengthening.
+    public var keyIterations : Int = 1024
 }
