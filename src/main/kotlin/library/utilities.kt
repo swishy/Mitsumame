@@ -14,7 +14,7 @@ public fun ByteArray.toCharArray() : CharArray {
 
     var count = 0
     for(byteVal in this) {
-        charArray[0] = byteVal.toChar();
+        charArray[count] = byteVal.toChar();
         count++
     }
 
