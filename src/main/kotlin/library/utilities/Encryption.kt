@@ -1,6 +1,7 @@
 package com.st8vrt.mitsumame.library.utilities
 
 import org.slf4j.LoggerFactory
+import com.st8vrt.mitsumame.configuration.mitsumameConfiguration
 import com.st8vrt.mitsumame.library.utilities.Session
 import com.st8vrt.mitsumame.library.utilities
 import org.apache.commons.codec.binary.Base64
@@ -22,7 +23,7 @@ public class Encryption
 {
     private val salt = "Adfas" + 24576 + "6&#N%^BW" + ",.|%^&*"
 
-    private val aesBlockSize = 32;
+    private val aesBlockSize = 256;
 
     private var log = LoggerFactory.getLogger(javaClass<Session>())
 
@@ -47,10 +48,7 @@ public class Encryption
 
             var charEncryptionKey = encryptionKey.toCharArray()
 
-            /*
-             TODO: encryption strength should come from settings
-             */
-            var keyspec = PBEKeySpec(charEncryptionKey, salt, 1024, aesBlockSize)
+            var keyspec = PBEKeySpec(charEncryptionKey, salt, mitsumameConfiguration.keyIterations, aesBlockSize)
             var secretKey = factory?.generateSecret(keyspec)
 
             var cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
@@ -70,13 +68,8 @@ public class Encryption
 
         try{
             var factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1")
-
             var charEncryptionKey = encryptionKey.toCharArray()
-
-            /*
-             TODO: encryption strength should come from settings
-             */
-            var keyspec = PBEKeySpec(charEncryptionKey, salt, 1024, aesBlockSize)
+            var keyspec = PBEKeySpec(charEncryptionKey, salt, mitsumameConfiguration.keyIterations, aesBlockSize)
             var secretKey = factory?.generateSecret(keyspec)
 
             var cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");

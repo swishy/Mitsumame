@@ -21,5 +21,5 @@ fun AppServer.useMitsumameException(path: String = "*") {
 
 fun AppServer.useMitsumameEncryption(path: String = "*") {
     intercept(MitsumameDecryptionInterceptor(), path, InterceptOn.PreRequest)
-    intercept(MitsumameEncryptionInterceptor(), path, InterceptOn.PostRequest)
+    intercept(MitsumameEncryptionInterceptor(), path, InterceptOn.PostExecution)
 }
