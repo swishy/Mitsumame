@@ -1,6 +1,6 @@
 package com.st8vrt.mitsumame.webservices.core
 
-import org.wasabi.http.HttpStatusCodes
+import org.wasabi.http.StatusCodes
 import org.wasabi.routing.routeHandler
 import org.codehaus.jackson.map.ObjectMapper
 import com.st8vrt.mitsumame.library.utilities.RootDocument

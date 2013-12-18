@@ -148,7 +148,7 @@ public class Encryption
         {
 
             var digest = MessageDigest.getInstance("SHA-256")
-            array = digest.digest((salt + password).getBytes()) as ByteArray
+            array = digest?.digest((salt + password).getBytes()) as ByteArray
 
         }
         catch(exception: NoSuchAlgorithmException)

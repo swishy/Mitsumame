@@ -4,7 +4,7 @@ import org.wasabi.interceptors.Interceptor
 import org.slf4j.LoggerFactory
 import org.wasabi.http.Request
 import org.wasabi.http.Response
-import org.wasabi.http.HttpStatusCodes
+import org.wasabi.http.StatusCodes
 import org.wasabi.http.ContentType
 import com.st8vrt.mitsumame.library.utilities.Encryption
 
@@ -40,7 +40,7 @@ public class MitsumameEncryptionInterceptor() : Interceptor {
         }
         catch(exception: Exception)
                 {
-                    response.statusCode = HttpStatusCodes.InternalServerError.statusCode
+                    response.statusCode = StatusCodes.InternalServerError.code
                     response.contentType = ContentType.TextPlain.name()
                     response.send("Encryption processing failed.")
                     return false
