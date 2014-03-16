@@ -1,1 +1,1 @@
-web:    com.st8vrt.mitsumame.MitsumamePackage
+web: ./MitsumameRoot/build/install/app/bin/app

@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '0.6.1673'
+    ext.kotlin_version = '0.7+'
     repositories {
         mavenCentral()
         maven {
@@ -35,7 +35,7 @@ repositories {
 
 dependencies {
     compile "org.codehaus.jackson:jackson-mapper-asl:1.9.12",
-            "io.netty:netty-all:4.0.0.CR1",
+            "io.netty:netty-all:4.0.17.Final",
             "commons-codec:commons-codec:1.8",
             "commons-logging:commons-logging:1.1.1",
             "org.apache.httpcomponents:httpclient:4.2.3",
@@ -45,8 +45,7 @@ dependencies {
             "org.hibernate:hibernate-core:4.2.6.Final",
             "org.postgresql:postgresql:9.2-1003-jdbc4",
             "org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.0.Final"
-
-    compile files('./lib/wasabi.jar', './lib/kotlin-runtime.jar')
+    compile files('./libs/wasabi.jar')
     compile "org.jetbrains.kotlin:kotlin-stdlib:$ext.kotlin_version"
 
 }
@@ -66,7 +65,7 @@ sourceSets {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '1.8'
+    gradleVersion = '1.9'
 }
 
-task stage(dependsOn: ['clean', 'jar'])
+task stage(dependsOn: ['clean', 'installApp'])
