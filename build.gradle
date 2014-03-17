@@ -44,7 +44,8 @@ dependencies {
             "org.slf4j:slf4j-simple:1.7.5",
             "org.hibernate:hibernate-core:4.2.6.Final",
             "org.postgresql:postgresql:9.2-1003-jdbc4",
-            "org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.0.Final"
+            "org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.0.Final",
+            "joda-time:joda-time:2.3"
     compile files('./libs/wasabi.jar')
     compile "org.jetbrains.kotlin:kotlin-stdlib:$ext.kotlin_version"
 

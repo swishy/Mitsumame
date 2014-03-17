@@ -29,9 +29,8 @@ public class Startup
 
 public class MitsumameServer : AppServer()
 {
-    private var log = LoggerFactory.getLogger(javaClass<MitsumameServer>())
+    private var log = LoggerFactory.getLogger(javaClass<MitsumameServer>());
 
-    MitsumameServer()
     {
         // Generate Mitsumame RootDocument
         Startup().addRootDocumentEntries();
