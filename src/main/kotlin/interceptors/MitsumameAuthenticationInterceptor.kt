@@ -37,8 +37,8 @@ public class MitsumameAuthenticationInterceptor(): Interceptor {
         response.statusCode = StatusCodes.Unauthorized.code
         response.contentType = ContentType.TextPlain.name()
         response.send("You are not authenticated against the requested application.")
-        response.location = URI(request.host + "/sessions").toString() as String
-        response.addExtraHeader("UserTokenUri", onetimeTokenUrl.toString() as String)
+        response.location = URI(request.host + "/sessions").toString()
+        response.addExtraHeader("UserTokenUri", onetimeTokenUrl.toString())
         return false
     }
 }

@@ -41,6 +41,9 @@ public class MitsumameServer : AppServer()
 
         log!!.info("Admin Created: ${user}")
 
+        // Set login channel
+        this.channel("/session", core.sessionChannelHandler)
+
         // Assign Core Routes
         this.get("/mitsumame", core.rootDocumentHandler)
         this.post("/onetimetoken", core.onetimeLoginTokenHandler)

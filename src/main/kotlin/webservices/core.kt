@@ -6,6 +6,9 @@ import org.codehaus.jackson.map.ObjectMapper
 import com.st8vrt.mitsumame.library.utilities.RootDocument
 import org.slf4j.LoggerFactory
 import com.st8vrt.mitsumame.MitsumameServer
+import org.wasabi.websocket.channelHandler
+import io.netty.handler.codec.http.websocketx.CloseWebSocketFrame
+import io.netty.handler.codec.http.websocketx.TextWebSocketFrame
 
 /**
  * Created with IntelliJ IDEA.
@@ -27,6 +30,18 @@ val rootDocumentHandler = routeHandler {
 val onetimeLoginTokenHandler = routeHandler {
 
     response.send("Implement me!")
+}
+
+val sessionChannelHandler = channelHandler {
+
+    log?.info("Session Channel Handler invoked.")
+
+    if (frame is TextWebSocketFrame)
+    {
+        log?.info("Web Socket Text: ${frame.text()}")
+    }
+
+    ctx?.channel()?.writeAndFlush("test")
 }
 
 
