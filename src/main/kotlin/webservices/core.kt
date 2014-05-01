@@ -40,8 +40,7 @@ val sessionChannelHandler = channelHandler {
     {
         log?.info("Web Socket Text: ${frame.text()}")
     }
-
-    ctx?.channel()?.writeAndFlush("test")
+    ctx?.channel()?.writeAndFlush(TextWebSocketFrame("BOO!"))
 }
 
 
