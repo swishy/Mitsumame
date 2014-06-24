@@ -13,13 +13,13 @@ import org.wasabi.http.ContentType
 /**
  * Created by swishy on 30/10/13.
  */
-public class MitsumameAuthenticationInterceptor(): Interceptor {
+public class MitsumameAuthenticationInterceptor(): Interceptor() {
 
     val SessionCookieId = "JoobMobileSessionId"
 
     private var log = LoggerFactory.getLogger(javaClass<MitsumameAuthenticationInterceptor>())
 
-    override fun intercept(request: Request, response: Response): Boolean {
+    override fun intercept(request: Request, response: Response) {
 
         log!!.info("Authentication Interceptor invoked.")
 
@@ -29,7 +29,7 @@ public class MitsumameAuthenticationInterceptor(): Interceptor {
 
         if(sessionCookie != null) {
             if (Session().isValid(sessionCookie!!.value))
-                return true;
+                next();
         }
 
         var onetimeTokenUrl = URI(request.host + "/onetimetoken")
@@ -38,7 +38,6 @@ public class MitsumameAuthenticationInterceptor(): Interceptor {
         response.contentType = ContentType.TextPlain.name()
         response.send("You are not authenticated against the requested application.")
         response.location = URI(request.host + "/sessions").toString()
-        response.addExtraHeader("UserTokenUri", onetimeTokenUrl.toString())
-        return false
+        response.addRawHeader("UserTokenUri", onetimeTokenUrl.toString())
     }
 }

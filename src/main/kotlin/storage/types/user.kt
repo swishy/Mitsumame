@@ -19,5 +19,5 @@ public class User(
 )
 {
     [Id]
-    var userId : UUID = UUID.randomUUID() as UUID
+    var userId : UUID = UUID.randomUUID()
 }
