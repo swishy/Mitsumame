@@ -13,7 +13,7 @@ public class MitsumameExceptionInterceptor :  Interceptor() {
     override fun intercept(request: Request, response: Response) {
 
         response.statusCode = StatusCodes.InternalServerError.code
-        response.contentType = ContentType.TextPlain.name()
+        response.contentType = ContentType.Text.Plain.contentType
         response.send("Error happened")
     }
 }

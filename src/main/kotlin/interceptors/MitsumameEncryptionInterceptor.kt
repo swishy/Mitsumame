@@ -41,7 +41,7 @@ public class MitsumameEncryptionInterceptor() : Interceptor() {
         catch(exception: Exception)
                 {
                     response.statusCode = StatusCodes.InternalServerError.code
-                    response.contentType = ContentType.TextPlain.name()
+                    response.contentType = ContentType.Text.Plain.contentType
                     response.send("Encryption processing failed.")
                 }
 
