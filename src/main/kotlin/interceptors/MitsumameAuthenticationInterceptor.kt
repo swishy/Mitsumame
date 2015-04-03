@@ -15,7 +15,7 @@ import org.wasabi.http.ContentType
  */
 public class MitsumameAuthenticationInterceptor(): Interceptor() {
 
-    val SessionCookieId = "JoobMobileSessionId"
+    val SessionCookieId = "MitsumameSessionId"
 
     private var log = LoggerFactory.getLogger(javaClass<MitsumameAuthenticationInterceptor>())
 
@@ -35,7 +35,7 @@ public class MitsumameAuthenticationInterceptor(): Interceptor() {
         var onetimeTokenUrl = URI(request.host + "/onetimetoken")
 
         response.statusCode = StatusCodes.Unauthorized.code
-        response.contentType = ContentType.Text.Plain.contentType
+        response.contentType = ContentType.Companion.Text.Plain.contentType
         response.send("You are not authenticated against the requested application.")
         response.location = URI(request.host + "/sessions").toString()
         response.addRawHeader("UserTokenUri", onetimeTokenUrl.toString())

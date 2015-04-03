@@ -10,7 +10,7 @@ public class OneTimeTokenDocument(
         val Token : UUID,
 
         // Always true currently
-        val JoobMobileEncryption : Boolean = true,
+        val MitsumameEncryption : Boolean = true,
 
         // Specifies the number of iterations to perform when strengthening keys so client/server are synced
         val KeyStrengtheningIterations : Int

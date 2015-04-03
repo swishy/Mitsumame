@@ -25,6 +25,8 @@
           <root url="jar://$MODULE_DIR$/libs/wasabi.jar!/" />
           <root url="jar://$MODULE_DIR$/libs/wasabi.jar!/" />
           <root url="jar://$MODULE_DIR$/libs/wasabi.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/wasabi.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/wasabi.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

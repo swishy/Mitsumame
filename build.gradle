@@ -1,5 +1,8 @@
+
+
 buildscript {
-    ext.kotlin_version = '0.1-SNAPSHOT'
+    project.ext.set("kotlin_version", '0.1-SNAPSHOT')
+
     repositories {
         mavenCentral()
         maven {
@@ -11,7 +14,7 @@ buildscript {
 
     }
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$ext.kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$project.kotlin_version"
     }
 }
 
@@ -47,7 +50,7 @@ dependencies {
             "org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.0.Final",
             "joda-time:joda-time:2.3"
     compile files('./libs/wasabi.jar')
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$ext.kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$project.kotlin_version"
 
 }
 
@@ -66,7 +69,7 @@ sourceSets {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '1.9'
+    gradleVersion = '2.3'
 }
 
 task stage(dependsOn: ['clean', 'installApp'])
