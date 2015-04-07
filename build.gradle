@@ -1,5 +1,3 @@
-
-
 buildscript {
     project.ext.set("kotlin_version", '0.1-SNAPSHOT')
 
@@ -51,6 +49,7 @@ dependencies {
             "joda-time:joda-time:2.3"
     compile files('./libs/wasabi.jar')
     compile "org.jetbrains.kotlin:kotlin-stdlib:$project.kotlin_version"
+    runtime "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.1.3"
 
 }
 

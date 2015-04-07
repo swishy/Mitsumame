@@ -40,8 +40,7 @@ val sessionChannelHandler = channelHandler {
     {
         log?.info("${ctx?.channel()?.remoteAddress()}")
         log?.info("Web Socket Text: ${frame.text()}")
-        ctx?.write(frame.text())
-        next()
+        ctx?.channel()!!.writeAndFlush(TextWebSocketFrame("A reply!"))
     }
 }
 

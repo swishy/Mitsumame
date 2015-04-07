@@ -55,7 +55,7 @@ public class MitsumameServer : AppServer()
 
         // Setup Mitsumame Interceptors for Authentication and Crypto
         //this.useMitsumameAuthentication()
-        this.useMitsumameEncryption()
+        //this.useMitsumameEncryption()
 
         this.start(true)
     }
