@@ -12,13 +12,13 @@ import com.st8vrt.mitsumame.storage.interfaces.UserStorageProvider
  */
 public class HibernateUserStorageProvider : UserStorageProvider {
 
-    private var log = LoggerFactory.getLogger(javaClass<HibernateUserStorageProvider>())
+    private var log = LoggerFactory.getLogger(HibernateUserStorageProvider::class.java)
 
     val factory = Configuration().configure()?.buildSessionFactory();
 
     override fun getUser(userId: UUID): User? {
         var session = factory?.openSession()
-        var user = session?.get(javaClass<User>(), userId) as User;
+        var user = session?.get(User::class.java, userId) as User;
         return user;
     }
 

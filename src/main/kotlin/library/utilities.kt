@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory
 
 // Static helpers.
 public fun ByteArray.toCharArray() : CharArray {
-    var charArray = CharArray(this.size)
+    var charArray = CharArray(this.size())
 
     var count = 0
     for(byteVal in this) {

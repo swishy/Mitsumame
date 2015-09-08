@@ -12,9 +12,9 @@ import javax.persistence.Id
  * To change this template use File | Settings | File Templates.
  */
 
-[Entity]
+@Entity
 public class Device(
-        [Id]
+        @Id
         val deviceId : UUID,
         val deviceType : String
 )

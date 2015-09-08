@@ -18,7 +18,7 @@ import io.netty.handler.codec.http.websocketx.TextWebSocketFrame
  * To change this template use File | Settings | File Templates.
  */
 
-private var log = LoggerFactory.getLogger(javaClass<MitsumameServer>())
+private var log = LoggerFactory.getLogger(MitsumameServer::class.java)
 
 val rootDocumentHandler = routeHandler {
 

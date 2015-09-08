@@ -12,9 +12,9 @@ import com.st8vrt.mitsumame.library.utilities.Encryption
  * Created by swishy on 30/10/13.
  */
 public class MitsumameEncryptionInterceptor() : Interceptor() {
-    private var log = LoggerFactory.getLogger(javaClass<MitsumameEncryptionInterceptor>())
+    private var log = LoggerFactory.getLogger(MitsumameEncryptionInterceptor::class.java)
 
-    override fun intercept(request: Request, response: Response) {
+    override fun intercept(request: Request, response: Response): Boolean {
 
         log!!.info("Encryption Interceptor invoked.")
 
@@ -36,7 +36,7 @@ public class MitsumameEncryptionInterceptor() : Interceptor() {
                 }
             }
 
-            next()
+            return true
         }
         catch(exception: Exception)
                 {
@@ -44,6 +44,7 @@ public class MitsumameEncryptionInterceptor() : Interceptor() {
                     response.contentType = ContentType.Companion.Text.Plain.contentType
                     response.send("Encryption processing failed.")
                 }
+        return false
 
     }
 }

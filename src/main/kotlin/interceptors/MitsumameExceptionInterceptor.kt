@@ -10,10 +10,11 @@ import org.wasabi.http.ContentType
  * Created by swishy on 30/10/13.
  */
 public class MitsumameExceptionInterceptor :  Interceptor() {
-    override fun intercept(request: Request, response: Response) {
+    override fun intercept(request: Request, response: Response): Boolean {
 
         response.statusCode = StatusCodes.InternalServerError.code
         response.contentType = ContentType.Companion.Text.Plain.contentType
         response.send("Error happened")
+        return false
     }
 }

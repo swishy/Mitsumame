@@ -1,17 +1,12 @@
 package com.st8vrt.mitsumame
 
-import org.wasabi.app.AppServer
-import com.st8vrt.mitsumame.library.utilities.RootDocument
-import com.st8vrt.mitsumame.webservices.core
 import com.st8vrt.mitsumame.configuration.mitsumameConfiguration
-import java.net.URI
-import com.st8vrt.mitsumame.interceptors.useMitsumameAuthentication
-import com.st8vrt.mitsumame.interceptors.useMitsumameEncryption
-import com.st8vrt.mitsumame.storage.types.Device
-import java.util.UUID
+import com.st8vrt.mitsumame.library.utilities.RootDocument
 import com.st8vrt.mitsumame.storage.types.User
+import com.st8vrt.mitsumame.webservices.core
 import org.slf4j.LoggerFactory
-import com.st8vrt.mitsumame.storage.types.User
+import org.wasabi.app.AppServer
+import java.net.URI
 
 /**
  * Created by swishy on 10/1/13.
@@ -27,13 +22,20 @@ public class Startup
     }
 }
 
-public class MitsumameServer : AppServer()
+public class Test
 {
-    private var log = LoggerFactory.getLogger(javaClass<MitsumameServer>());
+    var something = "TestValue"
+    var somethingElse = "AnotherValue"
+}
 
-    {
+public class MitsumameServer() : AppServer()
+{
+    private var log = LoggerFactory.getLogger(MitsumameServer::class.java);
+
+    init {
         // Generate Mitsumame RootDocument
-        Startup().addRootDocumentEntries();
+        var startup = Startup()
+        startup.addRootDocumentEntries()
 
         // TODO remove initial setup crud implemented during development for testing
         var user = User("admin", "password")
@@ -48,7 +50,7 @@ public class MitsumameServer : AppServer()
         this.get("/mitsumame", core.rootDocumentHandler)
         this.post("/onetimetoken", core.onetimeLoginTokenHandler)
         this.get("/testendpoint", {
-            var testObject = Test()
+            var testObject = com.st8vrt.mitsumame.Test()
             log!!.info("Test Object Created: ${testObject}")
             response.send(testObject)
         })
@@ -58,11 +60,7 @@ public class MitsumameServer : AppServer()
         //this.useMitsumameEncryption()
 
         this.start(true)
-    }
 
-    public class Test
-    {
-        var something = "TestValue"
-        var somethingElse = "AnotherValue"
     }
 }
+

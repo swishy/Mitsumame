@@ -11,7 +11,7 @@ public class RootDocument
 {
     public var rootDocumentEntries : HashMap<String, URI> = HashMap<String, URI>()
 
-    private var log = LoggerFactory.getLogger(javaClass<RootDocument>())
+    private var log = LoggerFactory.getLogger(RootDocument::class.java)
 
     public fun addRootDocumentUri(key : String, uri : URI)
     {

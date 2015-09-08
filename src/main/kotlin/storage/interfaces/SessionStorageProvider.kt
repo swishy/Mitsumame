@@ -6,7 +6,7 @@ import com.st8vrt.mitsumame.storage.types.Session
 /**
  * Created by swishy on 30/10/13.
  */
-public trait SessionStorageProvider {
+public interface SessionStorageProvider {
 
     fun getSession(sessionId: UUID) : Session?
 

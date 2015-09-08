@@ -25,23 +25,21 @@ public class Encryption
 
     private val aesBlockSize = 256;
 
-    private var log = LoggerFactory.getLogger(javaClass<Session>())
+    private var log = LoggerFactory.getLogger(Session::class.java)
 
     public fun encryptByteArray(array : ByteArray, key : ByteArray) : String  {
         var iv = getRandomIv();
 
-        return Base64.encodeBase64String(iv) + encryptByteArray(array, key, salt.getBytes(), iv as ByteArray)
+        return Base64.encodeBase64String(iv) + encryptByteArray(array, key, salt.toByteArray(), iv as ByteArray)
     }
 
     public fun encryptString(message : String, key : ByteArray) : String  {
         var iv = getRandomIv();
 
-        return Base64.encodeBase64String(iv) + encryptString(message, key, salt.getBytes(), iv as ByteArray)
+        return Base64.encodeBase64String(iv) + encryptString(message, key, salt.toByteArray(), iv as ByteArray)
     }
 
     public fun encryptByteArray(array:ByteArray, encryptionKey:ByteArray, salt:ByteArray, iv:ByteArray) : String {
-
-        var ivToUse = iv ?: getRandomIv()
 
         try{
             var factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1")
@@ -55,7 +53,7 @@ public class Encryption
             cipher?.init(Cipher.ENCRYPT_MODE, SecretKeySpec(secretKey?.getEncoded(), "AES")
                     , IvParameterSpec(iv));
 
-            return Base64.encodeBase64String(cipher?.doFinal(array)) as String
+            return Base64.encodeBase64String(cipher?.doFinal(array))
         } catch(e:Exception) {
             log?.error("Unable to encrypt message", e)
             throw Exception("Unable to encrypt message")
@@ -64,8 +62,6 @@ public class Encryption
 
     public fun encryptString(plainText:String, encryptionKey:ByteArray, salt:ByteArray, iv:ByteArray) : String {
 
-        var ivToUse = iv ?: getRandomIv()
-
         try{
             var factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1")
             var charEncryptionKey = encryptionKey.toCharArray()
@@ -76,7 +72,7 @@ public class Encryption
             cipher?.init(Cipher.ENCRYPT_MODE, SecretKeySpec(secretKey?.getEncoded(), "AES")
                     , IvParameterSpec(iv));
 
-            return Base64.encodeBase64String(cipher?.doFinal(plainText.getBytes())) as String
+            return Base64.encodeBase64String(cipher?.doFinal(plainText.toByteArray()))
         } catch(e:Exception) {
             log?.error("Unable to encrypt message", e)
             throw Exception("Unable to encrypt message")
@@ -85,9 +81,9 @@ public class Encryption
 
     public fun decryptString(encryptedPayload:String) : String {
         var iv = getIvFromPayload(encryptedPayload) as ByteArray
-        var message = getEncryptedMessageFromPayload(encryptedPayload)?: ""
-        var key = Base64.decodeBase64("") as ByteArray
-        return decryptString(message, key, salt.getBytes(), iv)
+        var message = getEncryptedMessageFromPayload(encryptedPayload)
+        var key = Base64.decodeBase64("")
+        return decryptString(message, key, salt.toByteArray(), iv)
     }
 
     public fun decryptString(cipherText:String, key:ByteArray, salt:ByteArray, iv:ByteArray) : String {
@@ -148,7 +144,7 @@ public class Encryption
         {
 
             var digest = MessageDigest.getInstance("SHA-256")
-            array = digest?.digest((salt + password).getBytes()) as ByteArray
+            array = digest?.digest((salt + password).toByteArray()) as ByteArray
 
         }
         catch(exception: NoSuchAlgorithmException)

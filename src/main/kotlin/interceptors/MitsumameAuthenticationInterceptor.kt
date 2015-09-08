@@ -17,9 +17,9 @@ public class MitsumameAuthenticationInterceptor(): Interceptor() {
 
     val SessionCookieId = "MitsumameSessionId"
 
-    private var log = LoggerFactory.getLogger(javaClass<MitsumameAuthenticationInterceptor>())
+    private var log = LoggerFactory.getLogger(MitsumameAuthenticationInterceptor::class.java)
 
-    override fun intercept(request: Request, response: Response) {
+    override fun intercept(request: Request, response: Response): Boolean {
 
         log!!.info("Authentication Interceptor invoked.")
 
@@ -28,8 +28,8 @@ public class MitsumameAuthenticationInterceptor(): Interceptor() {
         log!!.info("Session Cookie: ${sessionCookie}")
 
         if(sessionCookie != null) {
-            if (Session().isValid(sessionCookie!!.value))
-                next();
+            if (Session().isValid(sessionCookie.value))
+                return true;
         }
 
         var onetimeTokenUrl = URI(request.host + "/onetimetoken")
@@ -39,5 +39,6 @@ public class MitsumameAuthenticationInterceptor(): Interceptor() {
         response.send("You are not authenticated against the requested application.")
         response.location = URI(request.host + "/sessions").toString()
         response.addRawHeader("UserTokenUri", onetimeTokenUrl.toString())
+        return false
     }
 }

@@ -10,16 +10,15 @@ import org.wasabi.http.Response
  */
 public class MitsumameDecryptionInterceptor(): Interceptor() {
 
-    private var log = LoggerFactory.getLogger(javaClass<MitsumameDecryptionInterceptor>())
+    private var log = LoggerFactory.getLogger(MitsumameDecryptionInterceptor::class.java)
 
-    override fun intercept(request: Request, response: Response) {
+    override fun intercept(request: Request, response: Response): Boolean {
 
         log!!.info("Decryption Interceptor invoked.")
 
         // TODO implement decryption...
-        if (request != null)
-            next()
 
         // TODO call authentication handler once done here and force auth again as something in credentials is bad.
+        return false
     }
 }

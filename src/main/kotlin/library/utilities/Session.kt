@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory
  */
 public class Session
 {
-    private var log = LoggerFactory.getLogger(javaClass<Session>())
+    private var log = LoggerFactory.getLogger(Session::class.java)
 
     public fun isValid(sessionId : String) : Boolean
     {

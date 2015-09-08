@@ -12,12 +12,12 @@ import javax.persistence.Id
  * To change this template use File | Settings | File Templates.
  */
 
-[Entity]
+@Entity
 public class User(
         val userName : String,
         val authToken : String
 )
 {
-    [Id]
+    @Id
     var userId : UUID = UUID.randomUUID()
 }
