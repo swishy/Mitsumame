@@ -1,6 +1,7 @@
 package com.st8vrt.mitsumame
 
 import com.st8vrt.mitsumame.configuration.mitsumameConfiguration
+import com.st8vrt.mitsumame.interceptors.useMitsumameAuthentication
 import com.st8vrt.mitsumame.library.utilities.RootDocument
 import com.st8vrt.mitsumame.storage.types.User
 import com.st8vrt.mitsumame.webservices.core
@@ -44,7 +45,10 @@ public class MitsumameServer() : AppServer()
         log!!.info("Admin Created: ${user}")
 
         // Set login channel
-        this.channel("/session", core.sessionChannelHandler)
+        // this.channel("/session", core.sessionChannelHandler)
+
+        this.post("/session", core.sessionCreationHandler)
+        this.get("/session/:id", core.sessionSetupHandler)
 
         // Assign Core Routes
         this.get("/mitsumame", core.rootDocumentHandler)
@@ -56,7 +60,7 @@ public class MitsumameServer() : AppServer()
         })
 
         // Setup Mitsumame Interceptors for Authentication and Crypto
-        //this.useMitsumameAuthentication()
+        this.useMitsumameAuthentication()
         //this.useMitsumameEncryption()
 
         this.start(true)

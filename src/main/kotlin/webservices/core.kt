@@ -32,6 +32,18 @@ val onetimeLoginTokenHandler = routeHandler {
     response.send("Implement me!")
 }
 
+val sessionCreationHandler = routeHandler {
+
+    response.send("Implement me!")
+}
+
+val sessionSetupHandler = routeHandler {
+
+    // TODO grab session from storage.
+
+    // val session = sessions.firstOrNull { it.id == request.routeParams["id"]?.toInt() }
+}
+
 val sessionChannelHandler = channelHandler {
 
     log?.info("Session Channel Handler invoked.")
@@ -39,7 +51,7 @@ val sessionChannelHandler = channelHandler {
     if (frame is TextWebSocketFrame)
     {
         log?.info("${ctx?.channel()?.remoteAddress()}")
-        log?.info("Web Socket Text: ${frame.text()}")
+        log?.info("Web Socket Text: ${(frame as TextWebSocketFrame).text()}")
         ctx?.channel()!!.writeAndFlush(TextWebSocketFrame("A reply!"))
     }
 }
