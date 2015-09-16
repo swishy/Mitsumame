@@ -1,20 +1,18 @@
 package com.st8vrt.mitsumame.library.utilities
 
-import org.slf4j.LoggerFactory
 import com.st8vrt.mitsumame.configuration.mitsumameConfiguration
-import com.st8vrt.mitsumame.library.utilities.Session
-import com.st8vrt.mitsumame.library.utilities
 import org.apache.commons.codec.binary.Base64
-import javax.crypto.SecretKeyFactory
-import javax.crypto.spec.PBEKeySpec
-import javax.crypto.Cipher
-import javax.crypto.spec.SecretKeySpec
-import javax.crypto.spec.IvParameterSpec
-import javax.crypto.KeyGenerator
-import java.security.SecureRandom
+import org.slf4j.LoggerFactory
+import java.security.InvalidParameterException
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
-import java.security.InvalidParameterException
+import java.security.SecureRandom
+import javax.crypto.Cipher
+import javax.crypto.KeyGenerator
+import javax.crypto.SecretKeyFactory
+import javax.crypto.spec.IvParameterSpec
+import javax.crypto.spec.PBEKeySpec
+import javax.crypto.spec.SecretKeySpec
 
 /**
  * Created by swishy on 30/10/13.

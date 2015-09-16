@@ -30,7 +30,7 @@ public class Test
     var somethingElse = "AnotherValue"
 }
 
-public class MitsumameServer() : AppServer()
+public open class MitsumameServer() : AppServer()
 {
     private var log = LoggerFactory.getLogger(MitsumameServer::class.java);
 
@@ -61,10 +61,7 @@ public class MitsumameServer() : AppServer()
         })
 
         // Setup Mitsumame Authentication and Crypto
-        this.useAuthentication(MitsumameAuthentication())
-
-        this.start(true)
-
+        //this.useAuthentication(MitsumameAuthentication())
     }
 }
 
