@@ -1,12 +1,13 @@
 package com.st8vrt.mitsumame
 
+import com.st8vrt.mitsumame.authentication.MitsumameAuthentication
 import com.st8vrt.mitsumame.configuration.mitsumameConfiguration
-import com.st8vrt.mitsumame.interceptors.useMitsumameAuthentication
 import com.st8vrt.mitsumame.library.utilities.RootDocument
 import com.st8vrt.mitsumame.storage.types.User
 import com.st8vrt.mitsumame.webservices.core
 import org.slf4j.LoggerFactory
 import org.wasabi.app.AppServer
+import org.wasabi.interceptors.useAuthentication
 import java.net.URI
 
 /**
@@ -44,7 +45,7 @@ public class MitsumameServer() : AppServer()
 
         log!!.info("Admin Created: ${user}")
 
-        // Set login channel
+        // TODO investigate websockets for login negotiation
         // this.channel("/session", core.sessionChannelHandler)
 
         this.post("/session", core.sessionCreationHandler)
@@ -59,9 +60,8 @@ public class MitsumameServer() : AppServer()
             response.send(testObject)
         })
 
-        // Setup Mitsumame Interceptors for Authentication and Crypto
-        this.useMitsumameAuthentication()
-        //this.useMitsumameEncryption()
+        // Setup Mitsumame Authentication and Crypto
+        this.useAuthentication(MitsumameAuthentication())
 
         this.start(true)
 

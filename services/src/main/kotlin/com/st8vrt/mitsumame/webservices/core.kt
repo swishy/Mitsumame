@@ -39,21 +39,9 @@ val sessionCreationHandler = routeHandler {
 
 val sessionSetupHandler = routeHandler {
 
-    // TODO grab session from storage.
+    // TODO grab session from com.st8vrt.mitsumame.storage.
 
     // val session = sessions.firstOrNull { it.id == request.routeParams["id"]?.toInt() }
-}
-
-val sessionChannelHandler = channelHandler {
-
-    log?.info("Session Channel Handler invoked.")
-
-    if (frame is TextWebSocketFrame)
-    {
-        log?.info("${ctx?.channel()?.remoteAddress()}")
-        log?.info("Web Socket Text: ${(frame as TextWebSocketFrame).text()}")
-        ctx?.channel()!!.writeAndFlush(TextWebSocketFrame("A reply!"))
-    }
 }
 
 

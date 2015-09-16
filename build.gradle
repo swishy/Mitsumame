@@ -16,59 +16,60 @@ buildscript {
     }
 }
 
-apply plugin: 'kotlin'
-apply plugin: 'application'
 
-mainClassName = 'com.st8vrt.mitsumame.MitsumamePackage'
 
-repositories {
-    mavenCentral()
-    maven {
-        url "https://oss.sonatype.org/content/repositories/snapshots"
-    }
-    maven {
-        url "http://repo1.maven.org/maven2/org/hibernate/hibernate-core"
-    }
-    maven {
-        url "http://repo1.maven.org/maven2/javax/persistence/persistence-api/"
-    }
-}
 
-dependencies {
-    compile "org.codehaus.jackson:jackson-mapper-asl:1.9.12",
-            "io.netty:netty-all:4.0.31.Final",
-            "commons-codec:commons-codec:1.8",
-            "commons-logging:commons-logging:1.1.1",
-            "org.apache.httpcomponents:httpclient:4.2.3",
-            "org.apache.httpcomponents:httpcore:4.2.3",
-            "org.slf4j:slf4j-api:1.7.5",
-            "org.slf4j:slf4j-simple:1.7.5",
-            "org.hibernate:hibernate-core:4.2.6.Final",
-            "org.postgresql:postgresql:9.2-1003-jdbc4",
-            "org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.0.Final",
-            "joda-time:joda-time:2.3"
-    compile files('./libs/wasabi.jar')
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$project.kotlin_version"
-    runtime "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.1.3"
 
-}
+subprojects {
+    apply plugin: 'kotlin'
 
-sourceSets {
-    src {
-        main {
-            kotlin
+
+    repositories {
+        flatDir { dirs "$rootProject.projectDir/libs" }
+        mavenCentral()
+        maven {
+            url "https://oss.sonatype.org/content/repositories/snapshots"
+        }
+        maven {
+            url "http://repo1.maven.org/maven2/org/hibernate/hibernate-core"
+        }
+        maven {
+            url "http://repo1.maven.org/maven2/javax/persistence/persistence-api/"
         }
     }
-    test {
-        main {
-            kotlin
-        }
-    }
-    main.java.srcDirs += 'src/main/kotlin'
-}
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.3'
+    dependencies {
+        compile "org.codehaus.jackson:jackson-mapper-asl:1.9.12",
+                "io.netty:netty-all:4.0.31.Final",
+                "commons-codec:commons-codec:1.8",
+                "commons-logging:commons-logging:1.1.1",
+                "org.apache.httpcomponents:httpclient:4.2.3",
+                "org.apache.httpcomponents:httpcore:4.2.3",
+                "org.slf4j:slf4j-api:1.7.5",
+                "org.slf4j:slf4j-simple:1.7.5",
+                "org.hibernate:hibernate-core:4.2.6.Final",
+                "org.postgresql:postgresql:9.2-1003-jdbc4",
+                "org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.0.Final",
+                "joda-time:joda-time:2.3"
+        compile name: 'wasabi'
+        compile "org.jetbrains.kotlin:kotlin-stdlib:$project.kotlin_version"
+        runtime "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.1.3"
+
+    }
+
+    sourceSets {
+        src {
+            main {
+                kotlin
+            }
+        }
+        test {
+            main {
+                kotlin
+            }
+        }
+        main.java.srcDirs += 'src/main/kotlin'
+    }
 }
 
 task stage(dependsOn: ['clean', 'installApp'])

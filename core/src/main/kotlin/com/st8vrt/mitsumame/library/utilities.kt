@@ -7,6 +7,7 @@ package com.st8vrt.mitsumame.library.utilities
 import java.util.HashMap
 import java.net.URI
 import org.slf4j.LoggerFactory
+import org.wasabi.http.Request
 
 // Static helpers.
 public fun ByteArray.toCharArray() : CharArray {
@@ -19,4 +20,8 @@ public fun ByteArray.toCharArray() : CharArray {
     }
 
     return charArray
+}
+
+fun getQualifiedUrl(request: Request, relativePath: String) : URI {
+    return URI(request.protocol + "://" + request.host + ":" + request.port + relativePath)
 }

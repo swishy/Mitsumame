@@ -18,7 +18,7 @@ public class MitsumameDecryptionInterceptor(): Interceptor() {
 
         // TODO implement decryption...
 
-        // TODO call authentication handler once done here and force auth again as something in credentials is bad.
+        // TODO call com.st8vrt.mitsumame.authentication handler once done here and force auth again as something in credentials is bad.
         return false
     }
 }
