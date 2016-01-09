@@ -1,5 +1,6 @@
 buildscript {
-    project.ext.set("kotlin_version", '0.1-SNAPSHOT')
+    project.ext.kotlin_version = '1.0.0-beta-4584'
+    project.ext.wasabi_version = '0.1.174'
 
     repositories {
         mavenCentral()
@@ -25,8 +26,10 @@ subprojects {
 
 
     repositories {
-        flatDir { dirs "$rootProject.projectDir/libs" }
         mavenCentral()
+        maven {
+            url "http://repository.jetbrains.com/all"
+        }
         maven {
             url "https://oss.sonatype.org/content/repositories/snapshots"
         }
@@ -50,8 +53,8 @@ subprojects {
                 "org.hibernate:hibernate-core:4.2.6.Final",
                 "org.postgresql:postgresql:9.2-1003-jdbc4",
                 "org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.0.Final",
-                "joda-time:joda-time:2.3"
-        compile name: 'wasabi'
+                "joda-time:joda-time:2.3",
+                "org.wasabi:wasabi:$project.wasabi_version"
         compile "org.jetbrains.kotlin:kotlin-stdlib:$project.kotlin_version"
         runtime "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.1.3"
 

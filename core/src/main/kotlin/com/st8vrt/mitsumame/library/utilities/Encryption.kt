@@ -131,7 +131,7 @@ public class Encryption
      * @return the encrypted message as a Base64 string
      */
     public fun getEncryptedMessageFromPayload(payload:String) : String {
-        return payload.substring(24, payload.length())
+        return payload.substring(24, payload.length)
     }
 
     public fun generateKey(password : String, salt : String) : ByteArray

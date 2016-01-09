@@ -1,13 +1,14 @@
 package com.st8vrt.mitsumame
 
-import com.st8vrt.mitsumame.authentication.MitsumameAuthentication
 import com.st8vrt.mitsumame.configuration.mitsumameConfiguration
 import com.st8vrt.mitsumame.library.utilities.RootDocument
 import com.st8vrt.mitsumame.storage.types.User
-import com.st8vrt.mitsumame.webservices.core
+import com.st8vrt.mitsumame.webservices.core.onetimeLoginTokenHandler
+import com.st8vrt.mitsumame.webservices.core.rootDocumentHandler
+import com.st8vrt.mitsumame.webservices.core.sessionCreationHandler
+import com.st8vrt.mitsumame.webservices.core.sessionSetupHandler
 import org.slf4j.LoggerFactory
 import org.wasabi.app.AppServer
-import org.wasabi.interceptors.useAuthentication
 import java.net.URI
 
 /**
@@ -48,12 +49,12 @@ public open class MitsumameServer() : AppServer()
         // TODO investigate websockets for login negotiation
         // this.channel("/session", core.sessionChannelHandler)
 
-        this.post("/session", core.sessionCreationHandler)
-        this.get("/session/:id", core.sessionSetupHandler)
+        this.post("/session", sessionCreationHandler)
+        this.get("/session/:id", sessionSetupHandler)
 
         // Assign Core Routes
-        this.get("/mitsumame", core.rootDocumentHandler)
-        this.post("/onetimetoken", core.onetimeLoginTokenHandler)
+        this.get("/mitsumame", rootDocumentHandler)
+        this.post("/onetimetoken", onetimeLoginTokenHandler)
         this.get("/testendpoint", {
             var testObject = com.st8vrt.mitsumame.Test()
             log!!.info("Test Object Created: ${testObject}")
