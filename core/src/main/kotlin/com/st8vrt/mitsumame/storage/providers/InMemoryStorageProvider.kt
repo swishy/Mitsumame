@@ -15,19 +15,22 @@ import java.util.HashMap
 public class InMemoryStorageProvider : UserStorageProvider, DeviceStorageProvider, SessionStorageProvider{
 
     // Current in-memory list of users for testing.
-    private var currentUsers : HashMap<UUID, User> =  HashMap<UUID, User>()
+    private var currentUsers : HashMap<UUID, User> =  HashMap()
 
     // Current in-memory list of devices for testing.
-    private var currentDevices : HashMap<UUID, Device> =  HashMap<UUID, Device>()
+    private var currentDevices : HashMap<UUID, Device> =  HashMap()
 
     // Current in-memort list of session for testing.
-    private var currentSessions : HashMap<UUID, Session> =  HashMap<UUID, Session>()
+    private var currentSessions : HashMap<UUID, Session> =  HashMap()
+
+    // Current in-memort list of session for testing.
+    private var currentTokens : HashMap<String, String> =  HashMap()
 
     override fun storeUser(user: User) {
         currentUsers.put(user.userId, user)
     }
     override fun getUser(userId: UUID): User? {
-        return currentUsers.get(userId)
+        return currentUsers[userId]
     }
     override fun deleteUser(userId: UUID) {
         throw UnsupportedOperationException()
@@ -36,18 +39,30 @@ public class InMemoryStorageProvider : UserStorageProvider, DeviceStorageProvide
         currentDevices.put(device.deviceId, device)
     }
     override fun getDevice(deviceId: UUID): Device? {
-        return currentDevices.get(deviceId)
+        return currentDevices[deviceId]
     }
     override fun deleteDevice(deviceId: UUID) {
         throw UnsupportedOperationException()
     }
     override fun getSession(sessionId: UUID): Session? {
-        return currentSessions.get(sessionId)
+        return currentSessions[sessionId]
     }
-    override fun deleteSession(sessionId: String) {
-        throw UnsupportedOperationException()
+    override fun deleteSession(sessionId: UUID) {
+        currentSessions.remove(sessionId)
     }
     override fun storeSession(session: Session) {
         currentSessions.put(session.sessionId, session)
+    }
+
+    override fun getToken(key: String): String {
+        return currentTokens[key] as String
+    }
+
+    override fun setToken(key: String, token: String) {
+        currentTokens.put(key, token)
+    }
+
+    override fun deleteToken(key: String) {
+        currentTokens.remove(key)
     }
 }

@@ -33,7 +33,7 @@ public class MitsumameAuthentication : Authentication {
         // Setup headers for client to intercept.
         // Wasabi handles setting correct code and status.
         response.location = getQualifiedUrl(request, "/session").toString()
-        response.addRawHeader("UserTokenUri", onetimeTokenUrl.toString())
+        //response.addRawHeader("UserTokenUri", onetimeTokenUrl.toString())
         return false
     }
 }

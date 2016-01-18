@@ -54,6 +54,7 @@ subprojects {
                 "org.postgresql:postgresql:9.2-1003-jdbc4",
                 "org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.0.Final",
                 "joda-time:joda-time:2.3",
+                "com.fasterxml.jackson.core:jackson-core:2.6.4",
                 "org.wasabi:wasabi:$project.wasabi_version"
         compile "org.jetbrains.kotlin:kotlin-stdlib:$project.kotlin_version"
         runtime "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.1.3"

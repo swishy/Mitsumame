@@ -1,8 +1,14 @@
 package com.st8vrt.mitsumame.webservices.core
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.st8vrt.mitsumame.MitsumameServer
+import com.st8vrt.mitsumame.authentication.IMitsumamePlugin
+import com.st8vrt.mitsumame.configuration.mitsumameConfiguration
+import com.st8vrt.mitsumame.documents.SessionRequestDocument
+import com.st8vrt.mitsumame.library.utilities.Encryption
 import org.slf4j.LoggerFactory
 import org.wasabi.routing.routeHandler
+import java.util.*
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,6 +19,8 @@ import org.wasabi.routing.routeHandler
  */
 
 private var log = LoggerFactory.getLogger(MitsumameServer::class.java)
+
+private val tokenHeader = "logintoken"
 
 val rootDocumentHandler = routeHandler {
 
@@ -28,7 +36,22 @@ val onetimeLoginTokenHandler = routeHandler {
 
 val sessionCreationHandler = routeHandler {
 
-    response.send("Implement me!")
+    var mapper = ObjectMapper()
+
+    var requestDocument = mapper.readValue(request.document, SessionRequestDocument::class.java)
+
+    var plugin = mitsumameConfiguration.authHandler
+
+    var token = UUID.randomUUID().toString()
+
+    mitsumameConfiguration.sessionStorageProvider.setToken(requestDocument.uuid, token)
+
+    // Calls current auth handler to return an appropriate key ( passwd hash, oauth token )
+    var tokenResponse = Encryption().encryptString(token, plugin.getKey().toByteArray())
+
+    response.addRawHeader(tokenHeader, tokenResponse)
+
+    response.send("login response")
 }
 
 val sessionSetupHandler = routeHandler {

@@ -10,7 +10,13 @@ public interface SessionStorageProvider {
 
     fun getSession(sessionId: UUID) : Session?
 
-    fun deleteSession(sessionId: String)
+    fun deleteSession(sessionId: UUID)
 
     fun storeSession(session: Session)
+
+    fun getToken(key: String) : String
+
+    fun setToken(key: String, token: String)
+
+    fun deleteToken(key: String)
 }
