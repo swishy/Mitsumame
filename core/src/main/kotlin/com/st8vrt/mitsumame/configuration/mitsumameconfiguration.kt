@@ -8,6 +8,7 @@ import com.st8vrt.mitsumame.storage.interfaces.DeviceStorageProvider
 import com.st8vrt.mitsumame.storage.interfaces.UserStorageProvider
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
+import uy.kohesive.injekt.api.injectLazy
 import uy.kohesive.injekt.injectLazy
 
 /**
@@ -25,11 +26,11 @@ public class MitsumameConfiguration()
 {
     // Can be assigned to custom providers.
     // Make these injected using injekt / config declared libraries.
-    public var sessionStorageProvider : SessionStorageProvider =  InMemoryStorageProvider()
+    public var sessionStorageProvider : SessionStorageProvider =  Injekt.get()
 
-    public var deviceStorageProvider : DeviceStorageProvider = InMemoryStorageProvider()
+    public var deviceStorageProvider : DeviceStorageProvider = Injekt.get()
 
-    public var userStorageProvider : UserStorageProvider = InMemoryStorageProvider()
+    public var userStorageProvider : UserStorageProvider = Injekt.get()
 
     public var authHandler : IMitsumamePlugin = Foo()
 
