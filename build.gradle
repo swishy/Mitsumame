@@ -78,4 +78,4 @@ subprojects {
 
 task stage(dependsOn: ['clean', 'installApp'])
 
-task assemble(dependsOn: ['clean', 'build'])
+task assemble{}
