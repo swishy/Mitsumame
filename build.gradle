@@ -75,6 +75,7 @@ subprojects {
         main.java.srcDirs += 'src/main/kotlin'
     }
 }
+apply plugin: 'checkstyle'
 
 task stage(dependsOn: ['clean', 'installApp'])
 
